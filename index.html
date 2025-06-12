@@ -2,10 +2,111 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Сообщение</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Учебный сайт</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+      user-select: none;
+    }
+    .tab.active {
+      border-color: #007bff;
+      font-weight: bold;
+    }
+    .content {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      min-height: 200px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
-  <div class="centered">
-    <p>Лаврик лох, наелся блох,<br>сел на лавочку и проиграл Славе в армрестлинге</
+
+  <h1>Учебный сайт</h1>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="law">Право</div>
+    <div class="tab" data-tab="algebra">Алгебра</div>
+    <div class="tab" data-tab="russian">Русский язык</div>
+  </div>
+
+  <div class="content" id="content">
+    <h2>Право</h2>
+    <p>Здесь будут материалы по праву — введение в основные отрасли, базовые понятия...</p>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const content = document.getElementById('content');
+
+    const data = {
+      law: `
+        <h2>Право</h2>
+        <p>Материалы по праву — основные отрасли права:</p>
+        <ul>
+          <li>Гражданское право</li>
+          <li>Уголовное право</li>
+          <li>Административное право</li>
+          <li>Конституционное право</li>
+        </ul>
+        <p>Здесь можно размещать конспекты, ссылки на видео, статьи и примеры задач.</p>
+      `,
+      algebra: `
+        <h2>Алгебра</h2>
+        <p>Ключевые темы алгебры для школы:</p>
+        <ul>
+          <li>Линейные уравнения и неравенства</li>
+          <li>Квадратные уравнения</li>
+          <li>Функции и графики</li>
+          <li>Прогрессии</li>
+        </ul>
+        <p>Можно добавить примеры задач и решения, а также теорию.</p>
+      `,
+      russian: `
+        <h2>Русский язык</h2>
+        <p>Основные темы по русскому языку:</p>
+        <ul>
+          <li>Орфография</li>
+          <li>Пунктуация</li>
+          <li>Грамматика</li>
+          <li>Стилистика</li>
+        </ul>
+        <p>Тут можно разместить правила, примеры и упражнения.</p>
+      `
+    };
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Снять активность со всех вкладок
+        tabs.forEach(t => t.classList.remove('active'));
+        // Добавить активность к кликнутой вкладке
+        tab.classList.add('active');
+        // Показать соответствующий контент
+        const key = tab.getAttribute('data-tab');
+        content.innerHTML = data[key];
+      });
+    });
+  </script>
+
+</body>
+</html>
